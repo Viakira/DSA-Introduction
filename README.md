@@ -4,7 +4,7 @@ Code implementation of data structure and algorithm when learning firstly.
 I have learned DSA one year ago, and learn again this year. The reposity is not the original version.
 
 All codes come from *Data Structures and Algorithm Analysis in Java*,
-just with a few diffenrences. Because most codes are consistent with book,
+just with a few differences. Because most codes are consistent with book,
 I don't write any annotation.
 
 I don't design classes structure and other features.
