@@ -1,4 +1,4 @@
-package List;
+package src.List;
 
 public class LinkedList<AnyType> implements Iterable<AnyType> {
 

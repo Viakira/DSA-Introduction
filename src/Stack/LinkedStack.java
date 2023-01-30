@@ -1,4 +1,4 @@
-package Stack;
+package src.Stack;
 
 public class LinkedStack<AnyType> {
 

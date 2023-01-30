@@ -1,4 +1,4 @@
-package Queue;
+package src.Queue;
 
 public class LinkedQueue<AnyType> {
 

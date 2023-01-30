@@ -1,4 +1,4 @@
-package Tree;
+package src.Tree;
 
 public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 

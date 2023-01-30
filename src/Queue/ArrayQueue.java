@@ -1,6 +1,6 @@
-package Stack;
+package src.Queue;
 
-public class ArrayStack<AnyType> {
+public class ArrayQueue<AnyType> {
 
     private static final int DEFAULT_CAPACITY = 10;
 
@@ -9,8 +9,10 @@ public class ArrayStack<AnyType> {
     //------------------------------------------------------------------------------------
 
 
-    private AnyType[] stack;
-    private int topOfStack;
+    private AnyType[] queue;
+    private int head;
+    private int end;
+    private int size;
 
 
     //--------------------------------------------------------------------------------
@@ -18,8 +20,7 @@ public class ArrayStack<AnyType> {
     //--------------------------------------------------------------------------------
 
 
-    public ArrayStack() { this( DEFAULT_CAPACITY ); }
-    public ArrayStack( int capacity ) { stack = (AnyType[]) new Object[ capacity ]; topOfStack = -1; }
+    public ArrayQueue() { clear(); }
 
 
     //----------------------------------------------------------------------------------
@@ -27,47 +28,50 @@ public class ArrayStack<AnyType> {
     //----------------------------------------------------------------------------------
 
 
-    public int size() { return topOfStack + 1; }
+    public int size() { return size; }
 
-    public boolean isEmpty() { return topOfStack == -1; }
+    public boolean isEmpty() { return size == 0; }
 
-    public void clear() { stack = (AnyType[]) new Object[ DEFAULT_CAPACITY ]; topOfStack = -1; }
+    public void clear() {
+        queue = (AnyType[]) new Object[ DEFAULT_CAPACITY ];
+        head = end = size = 0;
+    }
 
     //----------------------------------------------------------------------------------
 
-    public AnyType top() {
-        if( isEmpty() )
-            throw new java.util.EmptyStackException();
+    public void enqueue( AnyType data ) {
+        if( size == queue.length )
+            ensureCapacity( size * 2 + 1 );
 
-        return stack[ topOfStack ];
+        queue[ end ] = data;
+        end = ( end + 1 ) % queue.length;
+
+        size++;
     }
 
-    public void push( AnyType data ) {
-        if( size() == stack.length )
-            ensureCapacity( size() * 2 + 1 );
-
-        stack[ ++topOfStack ] = data;
-    }
-
-    public AnyType pop() {
+    public AnyType dequeue() {
         if( isEmpty() )
-            throw new java.util.EmptyStackException();
+            throw new java.util.NoSuchElementException();
 
-        return stack[ topOfStack-- ];
+        AnyType old = queue[ head ];
+        head = ( head + 1 ) % queue.length;
+
+        size--;
+        return old;
     }
 
     //----------------------------------------------------------------------------------
 
     public void ensureCapacity( int capacity ) {
-        if( capacity < size() )
+        if( capacity < size )
             return ;
 
-        AnyType[] old = stack;
-        stack = (AnyType[]) new Object[ capacity ];
-        for( int i=0; i < size(); i++)
-            stack[i] = old[i];
+        AnyType[] old = queue;
+        queue = (AnyType[]) new Object[ capacity ];
+        for( int i=0; i < size; i++ )
+            queue[i] = old[i];
     }
 
-    public void trimToSize() { ensureCapacity( size() ); }
+    public void trimToSize() { ensureCapacity( size ); }
 
 }
