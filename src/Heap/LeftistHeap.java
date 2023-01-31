@@ -1,7 +1,5 @@
 package src.Heap;
 
-import java.util.NoSuchElementException;
-
 public class LeftistHeap<AnyType extends Comparable<? super AnyType>> {
 
 
@@ -51,7 +49,7 @@ public class LeftistHeap<AnyType extends Comparable<? super AnyType>> {
 
     public AnyType deleteMin() {
         if( isEmpty() )
-            throw new NoSuchElementException();
+            throw new java.util.NoSuchElementException();
 
         AnyType min = findMin();
         root = merge( root.left, root.right );
